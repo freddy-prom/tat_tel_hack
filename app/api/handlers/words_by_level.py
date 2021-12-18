@@ -4,31 +4,25 @@ from aiohttp.web import json_response
 from app.api.handlers.base_view import BaseView
 from app.api.schemas.request_schemas import AddGoodRequestSchema
 from app.db import crud
-import random
 
 
-class RandomWord(BaseView):
-    URL = "/api/v1/dictionary/words/random/{count}"
+class LevelWords(BaseView):
+    URL = "/api/v1/dictionary/words/level/{level_number}"
 
     async def get(self):
         try:
-            count = int(self.request.match_info["count"])
+            level_number = int(self.request.match_info["level_number"])
         except:
             return json_response(
                 status=HTTPStatus.BAD_REQUEST,
-                data={"message": "Cant get count"}
+                data={"message": "Cant get level number"}
             )
 
-        if count <= 0:
+        if not (1 <= level_number <= 4):
             return json_response(
                 status=HTTPStatus.BAD_REQUEST,
-                data={"message": "Count less than zero"})
-
-        words = crud.get_words()
-
-        if count > len(words):
-            count = len(words)
+                data={"message": "Level is in range from 1 to 4"})
 
         return json_response(
             status=HTTPStatus.OK,
-            data=random.sample(words, k=count))
+            data=crud.get_words_by_level(level_number))

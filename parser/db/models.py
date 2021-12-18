@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from db.database import Base
+from parser.db.database import Base
 
 
 class Word(Base):

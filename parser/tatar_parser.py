@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from transliterate import translit
 import urllib.request
-from db import crud, models
+from parser.db import crud, models
 from loguru import logger
 
 log = logger
@@ -69,7 +69,12 @@ def get_word_info(db_word: models.Word):
     if not audio_source:
         raise CantFindAudioSource
     audio_source = audio_source.attrs["data-src"]
-    urllib.request.urlretrieve(root + audio_source, f"data/{word.id}.mp3")
+    try:
+        urllib.request.urlretrieve(root + audio_source, f"data/{word.id}.mp3")
+    except Exception as e:
+        print(word.russian_word)
+        print(root + audio_source)
+        print(e)
 
     crud.set_translation(word.id, tatar_word=translation)
     print(f"Добавил перевод: {word.russian_word} - {translation}")
@@ -83,6 +88,7 @@ for word in crud.get_words():
     try:
         get_word_info(word)
     except CantFindTranslation:
+        crud.delete_word(word.id)
         log.info(f"Не удается найти перевод для слова {word.russian_word}")
     except CantFindAudioSource:
         log.info(f"Не удается найти аудио для слова {word.russian_word}")

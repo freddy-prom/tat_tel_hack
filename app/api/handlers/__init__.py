@@ -1,10 +1,9 @@
-from .goods import Goods
-from .good_single import GoodSingle
-from .ping import Ping, PingDb
+from .all_words import AllWords
+from .random_words import RandomWord
+from .words_by_level import LevelWords
 
 handlers = [
-    Goods,
-    GoodSingle,
-    Ping,
-    PingDb
+    AllWords,
+    RandomWord,
+    LevelWords
 ]
