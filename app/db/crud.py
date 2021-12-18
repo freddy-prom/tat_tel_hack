@@ -1,5 +1,5 @@
-from parser.db.database import SessionLocal
-from parser.db.models import Word
+from db.database import SessionLocal
+from db.models import Word
 from typing import List
 
 
@@ -12,33 +12,57 @@ def add_word(russian_word: str) -> Word:
     return db_word
 
 
-def get_words() -> List[dict]:
+def get_words() -> List[Word]:
     session = SessionLocal()
-
-    words = session.query(Word).all()
-    answer = []
-    for word in words:
-        answer.append(word_to_json(word))
-
-    return answer
+    return session.query(Word).all()
 
 
-def get_words_by_level(level: int) -> List[dict]:
+def set_translation(word_id: int, tatar_word: str):
     session = SessionLocal()
-
-    words = session.query(Word).filter(Word.level == level).all()
-    answer = []
-    for word in words:
-        answer.append(word_to_json(word))
-
-    return answer
+    db_word = session.query(Word).filter_by(id=word_id)
+    db_word.update({"tatar_word": tatar_word})
+    session.commit()
 
 
-def word_to_json(word: Word):
-    return {
-        "id": word.id,
-        "russian_word": word.russian_word,
-        "tatar_word": word.tatar_word,
-        "definition": word.tatar_definition,
-        "level": word.level,
-    }
+def delete_words():
+    session = SessionLocal()
+    session.query(Word).delete()
+    session.commit()
+
+
+def delete_word(word_id: int):
+    session = SessionLocal()
+    session.query(Word).filter(Word.id == word_id).delete()
+    session.commit()
+
+
+def get_russian_words() -> List[str]:
+    """
+    Возвращает список всех русских слов
+    """
+
+    session = SessionLocal()
+    return [_[0] for _ in session.query(Word.russian_word).all()]
+
+
+def get_tatar_words():
+    """
+    Возвращает список всех татарских слов
+    """
+
+    session = SessionLocal()
+    return [_[0] for _ in session.query(Word.tatar_word).all()]
+
+
+def get_word_by_id(word_id: int):
+    """
+    Возвращает слово по его ID
+
+    :param word_id: ID слова
+    """
+
+    session = SessionLocal()
+    return session.query(Word).filter(Word.id == word_id).first()
+
+
+

@@ -2,17 +2,16 @@ import aiohttp
 from aiohttp import web
 import os
 
-from app.api.handlers import handlers
-from app.api.middleware import middleware_exception
-from app.db.crud import Database
+from api.handlers import handlers
+from api.middleware import middleware_exception
 
-PORT = os.environ.get('PORT', 8080)
-HOST = os.environ.get('HOST', '0.0.0.0')
+
+PORT = os.environ.get('PORT', 5000)
+HOST = os.environ.get('HOST', '23.111.122.227')
 
 
 async def on_start(app: web.Application):
     app['connection_on'] = True
-    app['db'] = Database()
     app['client_session'] = aiohttp.ClientSession()
 
 
