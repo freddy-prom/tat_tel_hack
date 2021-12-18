@@ -1,0 +1,119 @@
+2021-12-17 10:59:14.504 | INFO     | loader:<module>:16 - Start
+2021-12-17 11:00:23.651 | INFO     | loader:<module>:16 - Start
+2021-12-17 11:01:31.247 | INFO     | loader:<module>:16 - Start
+2021-12-17 11:02:04.472 | INFO     | loader:<module>:16 - Start
+2021-12-17 11:04:32.444 | INFO     | loader:<module>:16 - Start
+2021-12-17 11:04:46.339 | INFO     | loader:<module>:16 - Start
+2021-12-17 11:07:49.308 | INFO     | loader:<module>:16 - Start
+2021-12-17 11:08:22.940 | INFO     | loader:<module>:16 - Start
+2021-12-17 11:11:11.248 | INFO     | loader:<module>:20 - Start
+2021-12-17 11:11:40.287 | INFO     | loader:<module>:20 - Start
+2021-12-17 11:17:37.975 | INFO     | loader:<module>:20 - Start
+2021-12-17 11:20:46.840 | INFO     | loader:<module>:20 - Start
+2021-12-17 11:23:03.877 | INFO     | loader:<module>:20 - Start
+2021-12-17 11:24:58.199 | INFO     | loader:<module>:20 - Start
+2021-12-17 11:25:34.238 | ERROR    | handlers.error_handler:errors_handler:20 - TelegramAPIError: Game_invalid 
+Update: {"update_id": 771612248, "inline_query": {"id": "2570231897741122814", "from": {"id": 598428747, "is_bot": false, "first_name": "Эмир", "username": "Wiped_0ut", "language_code": "ru"}, "chat_type": "sender", "query": "", "offset": ""}}
+Traceback (most recent call last):
+
+  File "tatar_games_bot.py", line 16, in <module>
+    executor.start_polling(dispatcher=dp, on_startup=on_startup, on_shutdown=on_shutdown,)
+    │        │                        │              │                       └ <function on_shutdown at 0x7ff8ebf1c280>
+    │        │                        │              └ <function on_startup at 0x7ff8ebd99d30>
+    │        │                        └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x7ff8e8bd52b0>
+    │        └ <function start_polling at 0x7ff8e9ccd430>
+    └ <module 'aiogram.utils.executor' from '/root/bot/venv/lib/python3.8/site-packages/aiogram/utils/executor.py'>
+
+  File "/root/bot/venv/lib/python3.8/site-packages/aiogram/utils/executor.py", line 45, in start_polling
+    executor.start_polling(
+    │        └ <function Executor.start_polling at 0x7ff8e9ccde50>
+    └ <aiogram.utils.executor.Executor object at 0x7ff8ebebdb20>
+  File "/root/bot/venv/lib/python3.8/site-packages/aiogram/utils/executor.py", line 323, in start_polling
+    loop.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x7ff8eb743550>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 570, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x7ff8eb7480d0>
+    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 1859, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x7ff8eb7b1e50>
+    └ <Handle <TaskWakeupMethWrapper object at 0x7ff8e834a760>(<Future finished result=None>)>
+  File "/usr/lib/python3.8/asyncio/events.py", line 81, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <TaskWakeupMethWrapper object at 0x7ff8e834a760>(<Future finished result=None>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <TaskWakeupMethWrapper object at 0x7ff8e834a760>(<Future finished result=None>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <TaskWakeupMethWrapper object at 0x7ff8e834a760>(<Future finished result=None>)>
+  File "/root/bot/venv/lib/python3.8/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {}
+                     │           │        └ (<aiogram.types.update.Update object at 0x7ff8e8340a90>,)
+                     │           └ <bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x7ff8e8bd52b0>>
+                     └ Handler.HandlerObj(handler=<bound method Dispatcher.process_update of <aiogram.dispatcher.dispatcher.Dispatcher object at 0x7...
+> File "/root/bot/venv/lib/python3.8/site-packages/aiogram/dispatcher/dispatcher.py", line 273, in process_update
+    return await self.inline_query_handlers.notify(update.inline_query)
+                 │    │                     │      │      └ <aiogram.types.fields.Field object at 0x7ff8e9e8c040>
+                 │    │                     │      └ <aiogram.types.update.Update object at 0x7ff8e8340a90>
+                 │    │                     └ <function Handler.notify at 0x7ff8e9df6670>
+                 │    └ <aiogram.dispatcher.handler.Handler object at 0x7ff8e8bd5520>
+                 └ <aiogram.dispatcher.dispatcher.Dispatcher object at 0x7ff8e8bd52b0>
+  File "/root/bot/venv/lib/python3.8/site-packages/aiogram/dispatcher/handler.py", line 116, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+                     │           │        │       └ {}
+                     │           │        └ (<aiogram.types.inline_query.InlineQuery object at 0x7ff8e8b92310>,)
+                     │           └ <function send_game at 0x7ff8e8c051f0>
+                     └ Handler.HandlerObj(handler=<function send_game at 0x7ff8e8c051f0>, spec=FullArgSpec(args=['inline_query'], varargs=None, vark...
+
+  File "/root/bot/handlers/test_handler.py", line 13, in send_game
+    await bot.answer_inline_query(inline_query.id,
+          │   │                   │            └ <aiogram.types.fields.Field object at 0x7ff8e9ecee50>
+          │   │                   └ <aiogram.types.inline_query.InlineQuery object at 0x7ff8e8b92310>
+          │   └ <function Bot.answer_inline_query at 0x7ff8e9e59820>
+          └ <aiogram.bot.bot.Bot object at 0x7ff8e8bd5190>
+
+  File "/root/bot/venv/lib/python3.8/site-packages/aiogram/bot/bot.py", line 3018, in answer_inline_query
+    return await self.request(api.Methods.ANSWER_INLINE_QUERY, payload)
+                 │    │       │   │       │                    └ {'inline_query_id': '2570231897741122814', 'results': '[{"id": "d340b7fd-1e84-4f17-8221-d9050e607ff3", "game_short_name": "Ga...
+                 │    │       │   │       └ <aiogram.utils.helper.Item object at 0x7ff8e9ea06d0>
+                 │    │       │   └ <class 'aiogram.bot.api.Methods'>
+                 │    │       └ <module 'aiogram.bot.api' from '/root/bot/venv/lib/python3.8/site-packages/aiogram/bot/api.py'>
+                 │    └ <function BaseBot.request at 0x7ff8e9e3e820>
+                 └ <aiogram.bot.bot.Bot object at 0x7ff8e8bd5190>
+  File "/root/bot/venv/lib/python3.8/site-packages/aiogram/bot/base.py", line 226, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+                 │   │                  │    │              │    │       │             │       │     └ None
+                 │   │                  │    │              │    │       │             │       └ {'inline_query_id': '2570231897741122814', 'results': '[{"id": "d340b7fd-1e84-4f17-8221-d9050e607ff3", "game_short_name": "Ga...
+                 │   │                  │    │              │    │       │             └ 'answerInlineQuery'
+                 │   │                  │    │              │    │       └ <aiogram.bot.bot.Bot object at 0x7ff8e8bd5190>
+                 │   │                  │    │              │    └ TelegramAPIServer(base='https://api.telegram.org/bot{token}/{method}', file='https://api.telegram.org/file/bot{token}/{path}')
+                 │   │                  │    │              └ <aiogram.bot.bot.Bot object at 0x7ff8e8bd5190>
+                 │   │                  │    └ <function BaseBot.get_session at 0x7ff8e9e3e0d0>
+                 │   │                  └ <aiogram.bot.bot.Bot object at 0x7ff8e8bd5190>
+                 │   └ <function make_request at 0x7ff8e9e9dc10>
+                 └ <module 'aiogram.bot.api' from '/root/bot/venv/lib/python3.8/site-packages/aiogram/bot/api.py'>
+  File "/root/bot/venv/lib/python3.8/site-packages/aiogram/bot/api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+           │            │       │        │             │        │             │        └ <function ClientResponse.text at 0x7ff8ea47e670>
+           │            │       │        │             │        │             └ <ClientResponse(https://api.telegram.org/bot5064686828:AAFGwVuavu9D_oHHY8-pIEln8fP4JwEovN8/answerInlineQuery) [400 Bad Reques...
+           │            │       │        │             │        └ 400
+           │            │       │        │             └ <ClientResponse(https://api.telegram.org/bot5064686828:AAFGwVuavu9D_oHHY8-pIEln8fP4JwEovN8/answerInlineQuery) [400 Bad Reques...
+           │            │       │        └ <property object at 0x7ff8eae73d60>
+           │            │       └ <ClientResponse(https://api.telegram.org/bot5064686828:AAFGwVuavu9D_oHHY8-pIEln8fP4JwEovN8/answerInlineQuery) [400 Bad Reques...
+           │            └ 'answerInlineQuery'
+           └ <function check_result at 0x7ff8e9e9d940>
+  File "/root/bot/venv/lib/python3.8/site-packages/aiogram/bot/api.py", line 115, in check_result
+    exceptions.BadRequest.detect(description)
+    │          │          │      └ 'Bad Request: GAME_INVALID'
+    │          │          └ <classmethod object at 0x7ff8e9e994f0>
+    │          └ <class 'aiogram.utils.exceptions.BadRequest'>
+    └ <module 'aiogram.utils.exceptions' from '/root/bot/venv/lib/python3.8/site-packages/aiogram/utils/exceptions.py'>
+  File "/root/bot/venv/lib/python3.8/site-packages/aiogram/utils/exceptions.py", line 141, in detect
+    raise cls(description)
+          │   └ 'bad request: game_invalid'
+          └ <class 'aiogram.utils.exceptions.BadRequest'>
+
+aiogram.utils.exceptions.BadRequest: Game_invalid
