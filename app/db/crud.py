@@ -1,5 +1,5 @@
 from db.database import SessionLocal
-from db.models import Word
+from db.models import Word, Excess
 from typing import List
 
 
@@ -12,57 +12,75 @@ def add_word(russian_word: str) -> Word:
     return db_word
 
 
-def get_words() -> List[Word]:
+def add_complete_word(word_id, tatar_word, russian_word, definition, level) -> Word:
     session = SessionLocal()
-    return session.query(Word).all()
-
-
-def set_translation(word_id: int, tatar_word: str):
-    session = SessionLocal()
-    db_word = session.query(Word).filter_by(id=word_id)
-    db_word.update({"tatar_word": tatar_word})
+    db_word = Word(id=word_id,
+                   tatar_word=tatar_word,
+                   russian_word=russian_word,
+                   definition=definition,
+                   level=level)
+    session.add(db_word)
     session.commit()
+    session.refresh(db_word)
+    return db_word
 
 
-def delete_words():
+def add_excess(question, answer) -> Word:
     session = SessionLocal()
-    session.query(Word).delete()
+    db_word = Excess(question=question,
+                     answer=answer)
+    session.add(db_word)
     session.commit()
+    session.refresh(db_word)
+    return db_word
 
 
-def delete_word(word_id: int):
+def get_words() -> List[dict]:
     session = SessionLocal()
-    session.query(Word).filter(Word.id == word_id).delete()
-    session.commit()
+
+    words = session.query(Word).all()
+    answer = []
+    for word in words:
+        answer.append(word_to_json(word))
+
+    return answer
 
 
-def get_russian_words() -> List[str]:
-    """
-    Возвращает список всех русских слов
-    """
-
+def get_words_by_level(level: int) -> List[dict]:
     session = SessionLocal()
-    return [_[0] for _ in session.query(Word.russian_word).all()]
+
+    words = session.query(Word).filter(Word.level == level).all()
+    answer = []
+    for word in words:
+        answer.append(word_to_json(word))
+
+    return answer
 
 
-def get_tatar_words():
-    """
-    Возвращает список всех татарских слов
-    """
-
+def get_all_excesses():
     session = SessionLocal()
-    return [_[0] for _ in session.query(Word.tatar_word).all()]
+
+    words = session.query(Excess).all()
+    answer = []
+    for word in words:
+        answer.append(excess_to_json(word))
+
+    return answer
 
 
-def get_word_by_id(word_id: int):
-    """
-    Возвращает слово по его ID
-
-    :param word_id: ID слова
-    """
-
-    session = SessionLocal()
-    return session.query(Word).filter(Word.id == word_id).first()
-
+def word_to_json(word: Word):
+    return {
+        "id": word.id,
+        "russian_word": word.russian_word,
+        "tatar_word": word.tatar_word,
+        "definition": word.russian_definition,
+        "level": word.level,
+    }
 
 
+def excess_to_json(excess: Excess):
+    return {
+        "id": excess.id,
+        "question": excess.question,
+        "answer": excess.answer
+    }

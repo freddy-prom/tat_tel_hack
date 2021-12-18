@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, JSON
 from db.database import Base
 
 
@@ -12,3 +12,11 @@ class Word(Base):
     russian_definition = Column(String)
     transcription = Column(String)
     level = Column(Integer)
+
+
+class Excess(Base):
+    __tablename__ = "excess"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    question = Column(JSON)
+    answer = Column(String)
