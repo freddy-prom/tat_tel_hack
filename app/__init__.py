@@ -1,13 +1,12 @@
 import aiohttp
 from aiohttp import web
 import os
-
+import ssl
 from api.handlers import handlers
 from api.middleware import middleware_exception
 
-
 PORT = os.environ.get('PORT', 5000)
-HOST = os.environ.get('HOST', '23.111.122.227')
+HOST = os.environ.get('HOST', 'tel-hackathon.ru')
 
 
 async def on_start(app: web.Application):
@@ -33,8 +32,13 @@ def create_app():
 
 
 def main():
+    ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+
+    crt = "/etc/letsencrypt/live/tel-hackathon.ru/fullchain.pem"
+    key = "/etc/letsencrypt/live/tel-hackathon.ru/privkey.pem"
+    ssl_context.load_cert_chain(crt, key)
     app = create_app()
-    web.run_app(app, port=PORT, host=HOST)
+    web.run_app(app, port=PORT, host=HOST, ssl_context=ssl_context)
 
 
 if __name__ == '__main__':

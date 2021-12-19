@@ -46,10 +46,16 @@ def get_words() -> List[dict]:
     return answer
 
 
+def get_word(word_id) -> dict:
+    session = SessionLocal()
+    word = session.query(Word).filter(Word.id == word_id).first()
+    return word_to_json(word) if word else None
+
+
 def get_words_by_level(level: int) -> List[dict]:
     session = SessionLocal()
 
-    words = session.query(Word).filter(Word.level == level).all()
+    words = session.query(Word).filter(Word.level == level, Word.alice_file_id is not None).all()
     answer = []
     for word in words:
         answer.append(word_to_json(word))

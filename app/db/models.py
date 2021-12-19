@@ -12,6 +12,7 @@ class Word(Base):
     russian_definition = Column(String)
     transcription = Column(String)
     level = Column(Integer)
+    alice_file_id = Column(String)
 
 
 class Excess(Base):
