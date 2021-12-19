@@ -4,9 +4,9 @@ if [ "$ret" -eq 0 ]
 then {
   echo "Running my bot" #output
   sleep 1  #delay
-  cd /root/bot.py
+  cd /root/bot
   . venv/bin/activate
-  python3 tatar_games_bot.py.py
+  python3 tatar_games_bot.py
   exit 1
 }
 else 

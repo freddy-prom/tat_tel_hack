@@ -14,7 +14,7 @@ games = [
 
 @dp.message_handler()
 async def all_messages(message: types.Message):
-    await message.answer(messages.USE_INLINE_MODE,parse_mode="HTML", disable_web_page_preview=False)
+    await message.answer(messages.USE_INLINE_MODE, parse_mode="HTML", disable_web_page_preview=False)
 
 
 @dp.inline_handler()
@@ -40,7 +40,7 @@ async def find_excess_game(query: types.CallbackQuery):
 @dp.callback_query_handler(lambda callback_query: callback_query.game_short_name == "word_translation")
 async def word_translation_game(query: types.CallbackQuery):
     # todo указать нормальную ссылку в будущем
-    await bot.answer_callback_query(query.id, url="https://tel-hackathon.ru/word_translation.html")
+    await bot.answer_callback_query(query.id, url="https://tel-hackathon.ru/word_translation/index.html")
 
     # todo нормально обновлять счет
     try:

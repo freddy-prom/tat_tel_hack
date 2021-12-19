@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TatarTele</title>
+    <link rel="stylesheet" href="main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+          integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="content">
+    <div id="mainAnswers" class="centered" style="display: none">
+        <div class="d-flex"><h2 id="progress" style="margin: auto; text-align: center; margin-bottom: 10px">Рекорд: 0</h2></div>
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+                 aria-valuemax="100">10с
+            </div>
+        </div>
+        <div style="background: aliceblue; border-radius: 10px; box-shadow: 0 0 10px 10px rgba(130, 130, 130, 0.1); padding: 20px">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Перевод</label>
+                    <p id="extra_info">фыафывдло</p>
+                    <input class="form-control" id="exampleInputEmail1" placeholder="Введите перевод">
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+        </div>
+    </div>
+    <div id="helloModal" class="centered">
+        <div style="background: aliceblue; border-radius: 10px; box-shadow: 0 0 10px 10px rgba(130, 130, 130, 0.1); padding: 20px">
+            <div id="bestProgress"></div>
+            <h3>Приветствуем вас в игре <br> <b>Слово-перевод</b></h3>
+            <a id="begin" href="javascript:void(0)" class="btn btn-info">Начать игру!</a>
+        </div>
+    </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
